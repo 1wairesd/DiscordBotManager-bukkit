@@ -1,0 +1,60 @@
+package com.wairesd.discordBotManager.bukkit.command;
+
+import com.wairesd.discordBotManager.bukkit.DiscordBotManagerBukkit;
+import com.wairesd.discordBotManager.bukkit.config.Messages;
+import com.wairesd.discordBotManager.bukkit.config.Settings;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
+
+import java.net.URI;
+import java.util.List;
+
+// Handles the /discordbotmanager-bukkit command for reloading configurations.
+public class AdminCommand implements CommandExecutor, TabCompleter {
+    private final DiscordBotManagerBukkit plugin;
+
+    public AdminCommand(DiscordBotManagerBukkit plugin) {
+        this.plugin = plugin;
+    }
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (args.length == 0 || !args[0].equalsIgnoreCase("reload")) {
+            sender.sendMessage(Messages.getMessage("usage-admin-command"));
+            return true;
+        }
+        if (!sender.hasPermission("discordbotmanager.reload")) {
+            sender.sendMessage(Messages.getMessage("no-permission"));
+            return true;
+        }
+
+        Settings.load(plugin);
+        Messages.load(plugin);
+
+        plugin.closeWebSocket();
+
+        plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
+            try {
+                URI uri = new URI("ws://" + Settings.getVelocityHost() + ":" + Settings.getVelocityPort());
+                DiscordBotManagerBukkit.MyWebSocketClient newClient = new DiscordBotManagerBukkit.MyWebSocketClient(uri, plugin);
+                plugin.setWsClient(newClient);
+                newClient.connect();
+            } catch (Exception e) {
+                plugin.getLogger().warning("Не удалось переподключиться к WebSocket: " + e.getMessage());
+            }
+        });
+
+        sender.sendMessage(Messages.getMessage("reload-success"));
+        return true;
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+        if (args.length == 1) {
+            return List.of("reload");
+        }
+        return List.of();
+    }
+}
