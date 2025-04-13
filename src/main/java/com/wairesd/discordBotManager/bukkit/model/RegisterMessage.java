@@ -6,8 +6,11 @@ import java.util.List;
 public class RegisterMessage {
     public String type = "register";
     public List<Command> commands;
+    public String secret; // New field for the secret code
 
-    public RegisterMessage(List<Command> commands) {
+    // Updated constructor that accepts the secret code
+    public RegisterMessage(List<Command> commands, String secret) {
         this.commands = commands;
+        this.secret = secret;
     }
 }

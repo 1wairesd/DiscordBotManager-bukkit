@@ -63,9 +63,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.java-websocket</groupId>
-            <artifactId>Java-WebSocket</artifactId>
-            <version>1.6.0</version>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.2.0.Final</version>
         </dependency>
         <dependency>
             <groupId>io.papermc.paper</groupId>

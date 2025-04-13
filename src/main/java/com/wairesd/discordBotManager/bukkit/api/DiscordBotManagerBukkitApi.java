@@ -2,13 +2,14 @@ package com.wairesd.discordBotManager.bukkit.api;
 
 import com.google.gson.Gson;
 import com.wairesd.discordBotManager.bukkit.DiscordBotManagerBukkit;
+import com.wairesd.discordBotManager.bukkit.config.Settings;
 import com.wairesd.discordBotManager.bukkit.handle.DiscordCommandHandler;
 import com.wairesd.discordBotManager.bukkit.model.Command;
 import com.wairesd.discordBotManager.bukkit.model.RegisterMessage;
 
 import java.util.List;
 
-// API for Bukkit plugins to interact with DiscordBotManager (register commands, send responses).
+// Provides an API for other Bukkit plugins to register commands and send responses via Netty.
 public class DiscordBotManagerBukkitApi {
     private final DiscordBotManagerBukkit plugin;
     private final Gson gson = new Gson();
@@ -23,16 +24,22 @@ public class DiscordBotManagerBukkitApi {
     }
 
     private void sendRegistrationMessage(Command command) {
-        RegisterMessage registerMsg = new RegisterMessage(List.of(command));
+        String secretCode = Settings.getSecretCode();
+        if (secretCode == null || secretCode.isEmpty()) {
+            return;
+        }
+
+        RegisterMessage registerMsg = new RegisterMessage(List.of(command), secretCode);
         String json = gson.toJson(registerMsg);
-        plugin.sendWebSocketMessage(json);
+        plugin.sendNettyMessage(json);
     }
+
 
     public void sendResponse(String requestId, String response) {
         plugin.sendResponse(requestId, response);
     }
 
     public void sendWebSocketMessage(String message) {
-        plugin.sendWebSocketMessage(message);
+        plugin.sendNettyMessage(message);
     }
 }

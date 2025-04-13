@@ -1,6 +1,7 @@
 package com.wairesd.discordBotManager.bukkit.command;
 
 import com.wairesd.discordBotManager.bukkit.DiscordBotManagerBukkit;
+import com.wairesd.discordBotManager.bukkit.network.NettyClient;
 import com.wairesd.discordBotManager.bukkit.config.Messages;
 import com.wairesd.discordBotManager.bukkit.config.Settings;
 import org.bukkit.command.Command;
@@ -8,7 +9,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 
-import java.net.URI;
+import java.net.InetSocketAddress;
 import java.util.List;
 
 // Handles the /discordbotmanager-bukkit command for reloading configurations.
@@ -33,16 +34,17 @@ public class AdminCommand implements CommandExecutor, TabCompleter {
         Settings.load(plugin);
         Messages.load(plugin);
 
-        plugin.closeWebSocket();
+        plugin.closeNettyConnection();
 
         plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
             try {
-                URI uri = new URI("ws://" + Settings.getVelocityHost() + ":" + Settings.getVelocityPort());
-                DiscordBotManagerBukkit.MyWebSocketClient newClient = new DiscordBotManagerBukkit.MyWebSocketClient(uri, plugin);
-                plugin.setWsClient(newClient);
+                String velocityHost = Settings.getVelocityHost();
+                int velocityPort = Settings.getVelocityPort();
+                NettyClient newClient = new NettyClient(new InetSocketAddress(velocityHost, velocityPort), plugin);
+                plugin.setNettyClient(newClient);
                 newClient.connect();
             } catch (Exception e) {
-                plugin.getLogger().warning("Не удалось переподключиться к WebSocket: " + e.getMessage());
+                plugin.getLogger().warning("Не удалось переподключиться к Netty: " + e.getMessage());
             }
         });
 
