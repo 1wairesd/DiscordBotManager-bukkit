@@ -44,7 +44,7 @@ public class AdminCommand implements CommandExecutor, TabCompleter {
                 plugin.setNettyClient(newClient);
                 newClient.connect();
             } catch (Exception e) {
-                plugin.getLogger().warning("Не удалось переподключиться к Netty: " + e.getMessage());
+                plugin.getLogger().warning("Failed to recover to Netty: " + e.getMessage());
             }
         });
 
