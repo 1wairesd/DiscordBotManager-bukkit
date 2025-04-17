@@ -19,8 +19,10 @@ public class DiscordBotManagerBukkitApi {
     }
 
     public void registerCommand(Command command, DiscordCommandHandler handler, DiscordBotManagerBukkit.DiscordCommandRegistrationListener listener) {
-        plugin.registerCommandHandler(command.name, handler, listener);
-        sendRegistrationMessage(command);
+        plugin.registerCommandHandler(command.name, handler, listener, command);
+        if (plugin.getNettyClient() != null && plugin.getNettyClient().isActive()) {
+            sendRegistrationMessage(command);
+        }
     }
 
     private void sendRegistrationMessage(Command command) {
@@ -29,17 +31,24 @@ public class DiscordBotManagerBukkitApi {
             return;
         }
 
-        RegisterMessage registerMsg = new RegisterMessage(List.of(command), secretCode);
+        RegisterMessage registerMsg = new RegisterMessage(
+                plugin.getServerName(),
+                command.pluginName,
+                List.of(command),
+                secretCode
+        );
         String json = gson.toJson(registerMsg);
         plugin.sendNettyMessage(json);
+        if (Settings.isDebugCommandRegistrations()) {
+            plugin.getLogger().info("Sent registration message for command: " + command.name);
+        }
     }
-
 
     public void sendResponse(String requestId, String response) {
         plugin.sendResponse(requestId, response);
     }
 
-    public void sendWebSocketMessage(String message) {
+    public void sendNettyMessage(String message) {
         plugin.sendNettyMessage(message);
     }
 }

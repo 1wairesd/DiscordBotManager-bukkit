@@ -17,19 +17,22 @@ public class Settings {
 
     /** Loads settings.yml asynchronously with default saving. */
     public static void load(JavaPlugin plugin) {
-        plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
-            File settingsFile = new File(plugin.getDataFolder(), "settings.yml");
-            if (!settingsFile.exists()) {
-                plugin.saveResource("settings.yml", false);
-            }
-            settingsConfig = YamlConfiguration.loadConfiguration(settingsFile);
-            logger.info("settings.yml loaded successfully");
-        });
+        File settingsFile = new File(plugin.getDataFolder(), "settings.yml");
+        if (!settingsFile.exists()) {
+            plugin.saveResource("settings.yml", false);
+        }
+        settingsConfig = YamlConfiguration.loadConfiguration(settingsFile);
     }
 
-    public static String getVelocityHost() { return settingsConfig != null ? settingsConfig.getString("velocity.host", "127.0.0.1") : "127.0.0.1"; }
-    public static int getVelocityPort() { return settingsConfig != null ? settingsConfig.getInt("velocity.port", 8080) : 8080; }
-    public static boolean isDebug() { return settingsConfig != null && settingsConfig.getBoolean("debug", false); }
-    public static String getServerName() { return settingsConfig != null ? settingsConfig.getString("server", "ServerName") : "ServerName"; }
-    public static String getSecretCode() { return settingsConfig != null ? settingsConfig.getString("velocity.secret", "") : ""; }
+    public static String getVelocityHost() { return settingsConfig.getString("velocity.host", "127.0.0.1"); }
+    public static int getVelocityPort() { return settingsConfig.getInt("velocity.port", 8080); }
+    public static String getServerName() { return settingsConfig.getString("server", "ServerName"); }
+    public static String getSecretCode() { return settingsConfig.getString("velocity.secret", ""); }
+
+    // Debug settings from the query
+    public static boolean isDebugConnections() { return settingsConfig.getBoolean("debug.debug-connections", true); }
+    public static boolean isDebugClientResponses() { return settingsConfig.getBoolean("debug.debug-client-responses", false); }
+    public static boolean isDebugCommandRegistrations() { return settingsConfig.getBoolean("debug.debug-command-registrations", false); }
+    public static boolean isDebugAuthentication() { return settingsConfig.getBoolean("debug.debug-authentication", true); }
+    public static boolean isDebugErrors() { return settingsConfig.getBoolean("debug.debug-errors", true); }
 }

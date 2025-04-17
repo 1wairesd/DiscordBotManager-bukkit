@@ -21,22 +21,19 @@ public class Messages {
 
     /** Loads messages.yml asynchronously with fallback creation. */
     public static void load(JavaPlugin plugin) {
-        plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
-            File messagesFile = new File(plugin.getDataFolder(), "messages.yml");
-            if (!messagesFile.exists()) {
-                try (InputStream in = plugin.getResource("messages.yml")) {
-                    if (in != null) {
-                        Files.copy(in, messagesFile.toPath());
-                    } else {
-                        logger.warn("messages.yml not found in resources");
-                    }
-                } catch (IOException e) {
-                    logger.error("Could not save messages.yml: {}", e.getMessage());
+        File messagesFile = new File(plugin.getDataFolder(), "messages.yml");
+        if (!messagesFile.exists()) {
+            try (InputStream in = plugin.getResource("messages.yml")) {
+                if (in != null) {
+                    Files.copy(in, messagesFile.toPath());
+                } else {
+                    plugin.getLogger().warning("messages.yml not found in resources");
                 }
+            } catch (IOException e) {
+                plugin.getLogger().severe("Could not save messages.yml: " + e.getMessage());
             }
-            messagesConfig = YamlConfiguration.loadConfiguration(messagesFile);
-            logger.info("messages.yml loaded successfully");
-        });
+        }
+        messagesConfig = YamlConfiguration.loadConfiguration(messagesFile);
     }
 
     /**
