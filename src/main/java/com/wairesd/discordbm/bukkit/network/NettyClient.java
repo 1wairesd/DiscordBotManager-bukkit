@@ -1,10 +1,10 @@
-package com.wairesd.discordBotManager.bukkit.network;
+package com.wairesd.discordbm.bukkit.network;
 
 import com.google.gson.Gson;
-import com.wairesd.discordBotManager.bukkit.DiscordBotManagerBukkit;
-import com.wairesd.discordBotManager.bukkit.config.Settings;
-import com.wairesd.discordBotManager.bukkit.model.Command;
-import com.wairesd.discordBotManager.bukkit.model.RegisterMessage;
+import com.wairesd.discordbm.bukkit.DiscordBMB;
+import com.wairesd.discordbm.bukkit.config.Settings;
+import com.wairesd.discordbm.bukkit.model.Command;
+import com.wairesd.discordbm.bukkit.model.RegisterMessage;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -29,13 +29,13 @@ import java.util.concurrent.CompletableFuture;
 public class NettyClient {
     private static final Logger logger = LoggerFactory.getLogger(NettyClient.class);
     private final InetSocketAddress address;
-    private final DiscordBotManagerBukkit plugin;
+    private final DiscordBMB plugin;
     private EventLoopGroup group;
     private Channel channel;
     private final Gson gson = new Gson();
     private boolean closing = false;
 
-    public NettyClient(InetSocketAddress address, DiscordBotManagerBukkit plugin) {
+    public NettyClient(InetSocketAddress address, DiscordBMB plugin) {
         this.address = address;
         this.plugin = plugin;
     }

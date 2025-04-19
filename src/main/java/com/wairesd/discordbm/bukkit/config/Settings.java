@@ -1,4 +1,4 @@
-package com.wairesd.discordBotManager.bukkit.config;
+package com.wairesd.discordbm.bukkit.config;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;

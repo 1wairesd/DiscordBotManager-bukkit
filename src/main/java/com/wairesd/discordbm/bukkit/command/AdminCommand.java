@@ -1,9 +1,9 @@
-package com.wairesd.discordBotManager.bukkit.command;
+package com.wairesd.discordbm.bukkit.command;
 
-import com.wairesd.discordBotManager.bukkit.DiscordBotManagerBukkit;
-import com.wairesd.discordBotManager.bukkit.network.NettyClient;
-import com.wairesd.discordBotManager.bukkit.config.Messages;
-import com.wairesd.discordBotManager.bukkit.config.Settings;
+import com.wairesd.discordbm.bukkit.DiscordBMB;
+import com.wairesd.discordbm.bukkit.network.NettyClient;
+import com.wairesd.discordbm.bukkit.config.Messages;
+import com.wairesd.discordbm.bukkit.config.Settings;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -14,9 +14,9 @@ import java.util.List;
 
 // Handles the /discordbotmanager-bukkit command for reloading configurations.
 public class AdminCommand implements CommandExecutor, TabCompleter {
-    private final DiscordBotManagerBukkit plugin;
+    private final DiscordBMB plugin;
 
-    public AdminCommand(DiscordBotManagerBukkit plugin) {
+    public AdminCommand(DiscordBMB plugin) {
         this.plugin = plugin;
     }
 

@@ -1,4 +1,4 @@
-package com.wairesd.discordBotManager.bukkit.model;
+package com.wairesd.discordbm.bukkit.model;
 
 // Represents an option for a command.
 public class CommandOption {

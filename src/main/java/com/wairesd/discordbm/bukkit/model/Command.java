@@ -1,4 +1,4 @@
-package com.wairesd.discordBotManager.bukkit.model;
+package com.wairesd.discordbm.bukkit.model;
 
 import java.util.List;
 

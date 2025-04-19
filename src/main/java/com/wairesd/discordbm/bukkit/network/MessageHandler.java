@@ -1,10 +1,10 @@
-package com.wairesd.discordBotManager.bukkit.network;
+package com.wairesd.discordbm.bukkit.network;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.wairesd.discordBotManager.bukkit.DiscordBotManagerBukkit;
-import com.wairesd.discordBotManager.bukkit.config.Settings;
-import com.wairesd.discordBotManager.bukkit.handle.DiscordCommandHandler;
+import com.wairesd.discordbm.bukkit.DiscordBMB;
+import com.wairesd.discordbm.bukkit.config.Settings;
+import com.wairesd.discordbm.bukkit.handle.DiscordCommandHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import org.slf4j.Logger;
@@ -20,13 +20,13 @@ import java.util.Map;
  */
 public class MessageHandler extends SimpleChannelInboundHandler<String> {
     private static final Logger logger = LoggerFactory.getLogger(MessageHandler.class);
-    private final DiscordBotManagerBukkit plugin;
+    private final DiscordBMB plugin;
     private final Gson gson = new Gson();
 
     /**
      * @param plugin Main plugin instance, used to access command handlers and send responses.
      */
-    public MessageHandler(DiscordBotManagerBukkit plugin) {
+    public MessageHandler(DiscordBMB plugin) {
         this.plugin = plugin;
     }
 

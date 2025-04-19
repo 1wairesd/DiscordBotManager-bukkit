@@ -1,4 +1,4 @@
-package com.wairesd.discordBotManager.bukkit.model;
+package com.wairesd.discordbm.bukkit.model;
 
 /**
  * Represents a response message sent from the Bukkit server back to the Discord bot.

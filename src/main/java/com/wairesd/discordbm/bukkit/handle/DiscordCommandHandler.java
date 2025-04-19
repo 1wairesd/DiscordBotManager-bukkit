@@ -1,4 +1,4 @@
-package com.wairesd.discordBotManager.bukkit.handle;
+package com.wairesd.discordbm.bukkit.handle;
 
 // Interface for handling Discord commands received via Netty.
 public interface DiscordCommandHandler {

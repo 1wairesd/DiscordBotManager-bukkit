@@ -1,15 +1,15 @@
-package com.wairesd.discordBotManager.bukkit;
+package com.wairesd.discordbm.bukkit;
 
 import com.google.gson.Gson;
-import com.wairesd.discordBotManager.bukkit.api.DiscordBotManagerBukkitApi;
-import com.wairesd.discordBotManager.bukkit.command.AdminCommand;
-import com.wairesd.discordBotManager.bukkit.config.Messages;
-import com.wairesd.discordBotManager.bukkit.config.Settings;
-import com.wairesd.discordBotManager.bukkit.handle.DiscordCommandHandler;
-import com.wairesd.discordBotManager.bukkit.model.Command;
-import com.wairesd.discordBotManager.bukkit.model.RegisterMessage;
-import com.wairesd.discordBotManager.bukkit.model.ResponseMessage;
-import com.wairesd.discordBotManager.bukkit.network.NettyClient;
+import com.wairesd.discordbm.bukkit.api.DiscordBotManagerBukkitApi;
+import com.wairesd.discordbm.bukkit.command.AdminCommand;
+import com.wairesd.discordbm.bukkit.config.Messages;
+import com.wairesd.discordbm.bukkit.config.Settings;
+import com.wairesd.discordbm.bukkit.handle.DiscordCommandHandler;
+import com.wairesd.discordbm.bukkit.model.Command;
+import com.wairesd.discordbm.bukkit.model.RegisterMessage;
+import com.wairesd.discordbm.bukkit.model.ResponseMessage;
+import com.wairesd.discordbm.bukkit.network.NettyClient;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.net.InetSocketAddress;
@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 // Main plugin class for Bukkit, sets up Netty client and handles command registration.
-public class DiscordBotManagerBukkit extends JavaPlugin {
+public class DiscordBMB extends JavaPlugin {
     private static DiscordBotManagerBukkitApi api;
     private NettyClient nettyClient;
     private final Map<String, DiscordCommandHandler> commandHandlers = new HashMap<>();

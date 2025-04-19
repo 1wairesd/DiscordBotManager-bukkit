@@ -1,7 +1,7 @@
-package com.wairesd.discordBotManager.bukkit.api;
+package com.wairesd.discordbm.bukkit.api;
 
-import com.wairesd.discordBotManager.bukkit.model.Command;
-import com.wairesd.discordBotManager.bukkit.model.CommandOption;
+import com.wairesd.discordbm.bukkit.model.Command;
+import com.wairesd.discordbm.bukkit.model.CommandOption;
 
 import java.util.ArrayList;
 import java.util.List;

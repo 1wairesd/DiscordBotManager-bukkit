@@ -1,8 +1,8 @@
-name: DiscordBotManager-bukkit
+name: DiscordBMB
 version: '1.0'
-main: com.wairesd.discordBotManager.bukkit.DiscordBotManagerBukkit
+main: com.wairesd.discordbm.bukkit.DiscordBMB
 api-version: '1.21'
 commands:
-  discordbotmanager-bukkit:
+  discordBMB:
     description: Discord bot plugin management
-    permission: discordbotmanager.admin
+    permission: discrdbmb.admin

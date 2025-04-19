@@ -1,6 +1,6 @@
-package com.wairesd.discordBotManager.bukkit.config;
+package com.wairesd.discordbm.bukkit.config;
 
-import com.wairesd.discordBotManager.bukkit.util.Color;
+import com.wairesd.discordbm.bukkit.util.Color;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;

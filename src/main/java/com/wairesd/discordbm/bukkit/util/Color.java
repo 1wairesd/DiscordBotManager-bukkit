@@ -1,4 +1,4 @@
-package com.wairesd.discordBotManager.bukkit.util;
+package com.wairesd.discordbm.bukkit.util;
 
 import org.bukkit.ChatColor;
 
