@@ -38,8 +38,8 @@ public class DiscordBMB extends JavaPlugin {
         int velocityPort = Settings.getVelocityPort();
         serverName = Settings.getServerName();
 
-        getCommand("discordbotmanager-bukkit").setExecutor(new AdminCommand(this));
-        getCommand("discordbotmanager-bukkit").setTabCompleter(new AdminCommand(this));
+        getCommand("discordBMB").setExecutor(new AdminCommand(this));
+        getCommand("discordBMB").setTabCompleter(new AdminCommand(this));
 
         getServer().getScheduler().runTaskAsynchronously(this, () -> {
             try {
